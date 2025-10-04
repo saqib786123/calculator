@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Calculator with Graphing & Converters</title>
+    <link rel="stylesheet" href="ultimate_calculator.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <h1>Ultimate Calculator</h1>
+            <div class="theme-toggle">
+                <button id="theme-btn">🌙</button>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="calculator">Calculator</button>
+            <button class="tab-btn" data-tab="graphing">Graphing</button>
+            <button class="tab-btn" data-tab="converter">Converter</button>
+        </div>
+        
+        <div class="tab-content active" id="calculator-tab">
+            <div class="calculator">
+                <div class="display">
+                    <input type="text" id="expression" class="expression-display" readonly placeholder="0">
+                    <input type="text" id="result" class="result-display" readonly placeholder="0">
+                </div>
+                <div class="buttons">
+                    <!-- First row -->
+                    <button class="btn function" onclick="appendToDisplay('Math.sin(')">sin</button>
+                    <button class="btn function" onclick="appendToDisplay('Math.cos(')">cos</button>
+                    <button class="btn function" onclick="appendToDisplay('Math.tan(')">tan</button>
+                    <button class="btn operation" onclick="appendToDisplay('/')">/</button>
+                    <button class="btn operation" onclick="memoryAdd()">M+</button>
+                    
+                    <!-- Second row -->
+                    <button class="btn function" onclick="appendToDisplay('Math.log(')">log</button>
+                    <button class="btn function" onclick="appendToDisplay('Math.ln(')">ln</button>
+                    <button class="btn function" onclick="appendToDisplay('Math.sqrt(')">√</button>
+                    <button class="btn operation" onclick="appendToDisplay('*')">×</button>
+                    <button class="btn operation" onclick="memoryRecall()">MR</button>
+                    
+                    <!-- Third row -->
+                    <button class="btn function" onclick="appendToDisplay('^')">x^y</button>
+                    <button class="btn function" onclick="appendToDisplay('Math.PI')">π</button>
+                    <button class="btn function" onclick="appendToDisplay('Math.E')">e</button>
+                    <button class="btn operation" onclick="appendToDisplay('-')">-</button>
+                    <button class="btn operation" onclick="memoryClear()">MC</button>
+                    
+                    <!-- Fourth row -->
+                    <button class="btn number" onclick="appendToDisplay('7')">7</button>
+                    <button class="btn number" onclick="appendToDisplay('8')">8</button>
+                    <button class="btn number" onclick="appendToDisplay('9')">9</button>
+                    <button class="btn operation" onclick="appendToDisplay('+')">+</button>
+                    <button class="btn operation" onclick="showHistory()">HIST</button>
+                    
+                    <!-- Fifth row -->
+                    <button class="btn number" onclick="appendToDisplay('4')">4</button>
+                    <button class="btn number" onclick="appendToDisplay('5')">5</button>
+                    <button class="btn number" onclick="appendToDisplay('6')">6</button>
+                    <button class="btn" onclick="toggleSign()">+/-</button>
+                    <button class="btn function" onclick="appendToDisplay('(')">(</button>
+                    
+                    <!-- Sixth row -->
+                    <button class="btn number" onclick="appendToDisplay('1')">1</button>
+                    <button class="btn number" onclick="appendToDisplay('2')">2</button>
+                    <button class="btn number" onclick="appendToDisplay('3')">3</button>
+                    <button class="btn function" onclick="appendToDisplay('Math.factorial(')">x!</button>
+                    <button class="btn function" onclick="appendToDisplay(')')">)</button>
+                    
+                    <!-- Seventh row -->
+                    <button class="btn number" onclick="appendToDisplay('0')" style="grid-column: span 2;">0</button>
+                    <button class="btn number" onclick="appendToDisplay('.')">.</button>
+                    <button class="btn equals" onclick="calculateResult()">=</button>
+                    <button class="btn operation" onclick="appendToDisplay('%')">%</button>
+                    
+                    <!-- Eighth row -->
+                    <button class="btn operation" onclick="clearDisplay()">C</button>
+                    <button class="btn operation" onclick="deleteLast()">DEL</button>
+                    <button class="btn operation" onclick="backspace()">⌫</button>
+                </div>
+            </div>
+            
+            <!-- History panel -->
+            <div class="history-panel" id="history-panel">
+                <h3>History</h3>
+                <div id="history-list"></div>
+                <button onclick="clearHistory()">Clear History</button>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="graphing-tab">
+            <div class="graphing-container">
+                <div class="graph-input">
+                    <label for="function-input">Enter function: y =</label>
+                    <input type="text" id="function-input" placeholder="e.g., x**2 + 2*x or Math.sin(x)">
+                    <button onclick="plotGraph()">Plot Graph</button>
+                </div>
+                <canvas id="graph-canvas" width="600" height="400"></canvas>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="converter-tab">
+            <div class="converter-container">
+                <div class="converter-selector">
+                    <select id="conversion-type">
+                        <option value="length">Length</option>
+                        <option value="weight">Weight</option>
+                        <option value="temperature">Temperature</option>
+                    </select>
+                </div>
+                
+                <div class="converter-inputs">
+                    <div class="input-group">
+                        <label for="from-unit">From:</label>
+                        <select id="from-unit"></select>
+                        <input type="number" id="from-value" placeholder="Enter value">
+                    </div>
+                    
+                    <div class="convert-btn-container">
+                        <button onclick="convertUnits()">→</button>
+                        <button onclick="swapUnits()">⇄</button>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="to-unit">To:</label>
+                        <select id="to-unit"></select>
+                        <input type="text" id="to-value" placeholder="Result" readonly>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="ultimate_calculator.js"></script>
+</body>
+</html>

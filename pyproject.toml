@@ -1,0 +1,17 @@
+[project]
+name = "hello-world"
+version = "0.1.0"
+description = "A simple calculator application"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "colorama>=0.4.6",
+    "pytest>=8.4.2",
+]
+
+[project.optional-dependencies]
+test = ["pytest"]
+
+[tool.pytest.ini_options]
+testpaths = ["test_calculator.py"]
+python_files = ["test_*.py"]
